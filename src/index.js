@@ -13,15 +13,20 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(morgan('combined'));
 
 //middle ware
-app.use(express.urlencoded({
-    extended: true
-})); //dạng form
+app.use(
+    express.urlencoded({
+        extended: true,
+    }),
+); //dạng form
 app.use(express.json()); // gửi bằng js
 
 //template engine
-app.engine('hbs', handlebars.engine({
-    extname: '.hbs',
-}));
+app.engine(
+    'hbs',
+    handlebars.engine({
+        extname: '.hbs',
+    }),
+);
 
 app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'resources/views'));
