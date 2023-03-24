@@ -2,6 +2,7 @@ const path = require('path');
 const express = require('express');
 const morgan = require('morgan');
 const handlebars = require('express-handlebars');
+const methodOverride = require('method-override');
 const app = express();
 const port = 3000;
 
@@ -18,6 +19,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 //http logger
 app.use(morgan('combined'));
 
+//method override
+app.use(methodOverride('_method'));
+
 //middle ware
 app.use(
     express.urlencoded({
@@ -31,6 +35,9 @@ app.engine(
     'hbs',
     handlebars.engine({
         extname: '.hbs',
+        helpers: {
+            sum: (a, b) => a + b,
+        }
     }),
 );
 
